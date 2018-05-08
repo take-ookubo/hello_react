@@ -3,14 +3,23 @@ import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {AppBar,RaisedButton} from 'material-ui';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Destination extends Component {
   render () {
     return(
-      <div>目的地入力</div>
+      <div>{this.props.myFunc()}目的地入力</div>
     );
   }
+  hiddenParent(parent) {
+    //  親要素を非表示にする
+    parent.hidden();
+  }
 }
+
+Destination.propTypes = {
+  myFunc: PropTypes.func,
+};
 
 class Schedule extends Component {
   render () {
@@ -40,12 +49,18 @@ class App extends Component {
     }
   }
 
+  handleChildFunc () {
+    return 'parent test';
+  //  自分自身の要素を非表示にするのか、
+    this.hidden();
+  }
   render() {
     return (
       <MuiThemeProvider>
         <BrowserRouter>
           <div className="App">
             <AppBar title="ApplePie" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+            <TopCompornet />
             <div>
               <div className="CatchCopy">あなたの旅行の最安価格を簡単に比較。</div>
               <Link to='/destination'>
@@ -57,7 +72,7 @@ class App extends Component {
               <Link to='/guest_number'>
                 <RaisedButton label={this.state.guest_number} className="Button"/>
               </Link>
-              <Route exact path='/destination' component={Destination} />
+              <Route exact path='/destination' render={()=><Destination myFunc={this.handleChildFunc.bind(this)} />} />
               <Route exact path='/schedule' component={Schedule} />
               <Route exact path='/guest_number' component={GuestNumber} />
             </div>
