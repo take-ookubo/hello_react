@@ -13,7 +13,7 @@ class Destination extends Component {
   }
   hiddenParent(parent) {
     //  親要素を非表示にする
-    parent.hidden();
+    // parent.hidden();
   }
 }
 
@@ -36,6 +36,7 @@ class GuestNumber extends Component {
     );
   }
 }
+
 class App extends Component {
   constructor () {
     super();
@@ -50,17 +51,15 @@ class App extends Component {
   }
 
   handleChildFunc () {
-    return 'parent test';
-  //  自分自身の要素を非表示にするのか、
-    this.hidden();
+    return '';
+    //  自分自身の要素を非表示にするのか、
   }
   render() {
     return (
-      <MuiThemeProvider>
         <BrowserRouter>
+          <MuiThemeProvider>
           <div className="App">
             <AppBar title="ApplePie" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
-            <TopCompornet />
             <div>
               <div className="CatchCopy">あなたの旅行の最安価格を簡単に比較。</div>
               <Link to='/destination'>
@@ -77,8 +76,8 @@ class App extends Component {
               <Route exact path='/guest_number' component={GuestNumber} />
             </div>
           </div>
+          </MuiThemeProvider>
         </BrowserRouter>
-      </MuiThemeProvider>
     );
   }
 }
