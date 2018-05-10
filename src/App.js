@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {AppBar,RaisedButton} from 'material-ui';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import NotFound from './components/NotFound';
 
 class Destination extends Component {
   render () {
@@ -85,6 +86,7 @@ class App extends Component {
                   <Route exact path='/destination' render={()=><Destination myFunc={this.handleChildFunc.bind(this)} />} />
                   <Route exact path='/schedule' component={Schedule} />
                   <Route exact path='/guest_number' component={GuestNumber} />
+                  <Route component={NotFound}/>
                 </Switch>
               </div>
             </div>
