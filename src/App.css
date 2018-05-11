@@ -3,6 +3,11 @@
     font-size: large;
 }
 
+AutoComplete {
+    text-align: center;
+    font-size: large;
+}
+
 .Button {
     margin: 12px;
 }

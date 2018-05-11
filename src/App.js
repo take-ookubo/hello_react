@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
+// material-ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {AppBar,RaisedButton} from 'material-ui';
+import {AppBar,RaisedButton,AutoComplete} from 'material-ui';
+
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NotFound from './components/NotFound';
@@ -38,6 +40,20 @@ class GuestNumber extends Component {
   }
 }
 
+const colors = [
+  'シンガポール マリーナベイサンズ',
+  'シンガポール ペニンシュラエクセルシオール',
+  'シンガポール リッツカールトン',
+  'シンガポール ブギス ホテルボス',
+  'シンガポール リゾート・ワールド・セントーサ',
+  'シンガポール イビス',
+];
+
+const menuProps = {
+  desktop: true,
+  disableAutoFocus: true,
+};
+
 class Top extends Component {
   constructor () {
     super();
@@ -54,7 +70,17 @@ class Top extends Component {
   render () {
     return(
       <div>
-        <div className="CatchCopy">あなたの旅行の最安価格を簡単に比較。</div>
+        <div className="CatchCopy">国内&海外のホテル・宿泊検索</div>
+        <div>
+          <AutoComplete
+            className=''
+            hintText="シンガポール マリーナベイサンズ"
+            dataSource={colors}
+            menuProps={menuProps}
+            floatingLabelText="都市名 ホテル名を入力してください"
+            fullWidth={true}
+          />
+        </div>
         <Link to='/destination'>
           <RaisedButton label={this.state.destination} className="Button"/>
         </Link>
