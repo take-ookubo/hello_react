@@ -12,10 +12,9 @@ import NotFound from './components/NotFound';
 import Map from './map.png';
 import { MapInteractionCSS } from 'react-map-interaction';
 
-import {List, ListItem} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
+import {GridList, GridTile} from 'material-ui/GridList';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+
 
 class Destination extends Component {
   render () {
@@ -79,7 +78,7 @@ class Top extends Component {
         <div className="CatchCopy">国内&海外のホテル・宿泊検索</div>
         <div>
           <AutoComplete
-            className=''
+            className='AutoComplete'
             hintText="シンガポール マリーナベイサンズ"
             dataSource={colors}
             menuProps={menuProps}
@@ -87,37 +86,39 @@ class Top extends Component {
             fullWidth={true}
           />
           <MapInteractionCSS>
-            <img src={Map} />
+            <img className='Map' src={Map}/>
           </MapInteractionCSS>
-          <Card>
+          <Card
+            initiallyExpanded={true}
+          >
             <CardHeader
               title="人気都市から探す"
               actAsExpander={true}
               showExpandableButton={true}
             />
             <CardText expandable={true}>
-              <Link to='/hotels/asia/tai/bankoku'>
-                <FlatButton label="バンコク" />
-              </Link>
-              <Link to='/hotels/asia/korea/seoul'>
-                <FlatButton label="ソウル" />
-              </Link>
-              <Divider />
-              <FlatButton label="ホノルル" />
-              <FlatButton label="ロサンゼルス" />
-              <Divider />
-              <FlatButton label="パリ" />
-              <FlatButton label="ミラノ" />
-              <Divider />
-              <FlatButton label="台北" />
-              <FlatButton label="香港" />
-              <Divider />
-              <FlatButton label="ニューヨーク" />
-              <FlatButton label="オーランド" />
-              <Divider />
-              <Divider />
-              <FlatButton label="ロンドン" />
-              <FlatButton label="フィレンツェ" />
+              <GridList cellHeight={40}>
+                <Link to='/hotels/asia/tai/bankoku'>
+                  <GridTile title='バンコク' />
+                </Link>
+                <Link to='/hotels/asia/korea/seoul'>
+                  <GridTile title='ソウル' />
+                </Link>
+                <Link to='/hotels/asia/tai/bankoku'>
+                  <GridTile title='ホノルル' />
+                </Link>
+                <Link to='/hotels/asia/korea/seoul'>
+                  <GridTile title='ロサンゼルス' />
+                </Link>
+                <GridTile title='パリ' />
+                <GridTile title='ミラノ' />
+                <GridTile title='台北' />
+                <GridTile title='香港' />
+                <GridTile title='ニューヨーク' />
+                <GridTile title='オーランド' />
+                <GridTile title='ロンドン' />
+                <GridTile title='フィレンツェ' />
+              </GridList>
             </CardText>
           </Card>
         </div>
@@ -136,7 +137,7 @@ class App extends Component {
         <BrowserRouter>
           <MuiThemeProvider>
             <div className="App">
-              <AppBar title="BestTrip" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+              <AppBar title="AppliePie" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
               <div>
                 <Switch>
                   <Route exact path='/' component={Top} />

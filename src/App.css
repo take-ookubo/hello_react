@@ -3,9 +3,10 @@
     font-size: large;
 }
 
-AutoComplete {
+.AutoComplete {
     text-align: center;
     font-size: large;
+    margin: 5%;
 }
 
 .Button {
