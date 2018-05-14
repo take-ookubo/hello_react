@@ -14,7 +14,7 @@ import { MapInteractionCSS } from 'react-map-interaction';
 
 import {GridList, GridTile} from 'material-ui/GridList';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-
+import {FlatButton} from 'material-ui/FlatButton'
 
 class Destination extends Component {
   render () {
@@ -60,22 +60,22 @@ const menuProps = {
 
 
 class Top extends Component {
-  constructor () {
-    super();
-    const country = '韓国';
-    const city = 'ソウル';
-    const number = '大人1名';
-    this.state = {
-      destination: `目的地(${country},${city})`,
-      schedule: `日程(5/1〜5/3)`,
-      guest_number: `人数(${number})`
-    }
+  constructor (props) {
+    super(props);
+    // const country = '韓国';
+    // const city = 'ソウル';
+    // const number = '大人1名';
+    // this.state = {
+    //   destination: `目的地(${country},${city})`,
+    //   schedule: `日程(5/1〜5/3)`,
+    //   guest_number: `人数(${number})`
+    // }
   }
 
   render () {
     return(
       <div>
-        <div className="CatchCopy">国内&海外のホテル・宿泊検索</div>
+        <div className="CatchCopy" onClick={this.props.onClick}>国内&海外のホテル・宿泊検索</div>
         <div>
           <AutoComplete
             className='AutoComplete'
@@ -85,8 +85,12 @@ class Top extends Component {
             floatingLabelText="都市名 ホテル名を入力してください"
             fullWidth={true}
           />
+          <span className='labelMap japan' onClick={this.props.onClick}>日本</span>
           <MapInteractionCSS>
-            <img className='Map' src={Map}/>
+            <div className='ClickableMap'>
+              <span className='labelMap japan'>日本</span>
+              <img className='Map' src={Map} onClick={this.props.onClick}/>
+            </div>
           </MapInteractionCSS>
           <Card
             initiallyExpanded={true}
@@ -128,9 +132,30 @@ class Top extends Component {
 }
 
 class App extends Component {
-  handleChildFunc () {
-    return '';
-    //  自分自身の要素を非表示にするのか、
+  constructor() {
+    super();
+    // firebase.initializeApp(FirebaseConfig);
+    this.clickMap = this.handleClick.bind(this)
+  }
+  componentWillMount() {
+    // let postsRef = firebase.database().ref('posts');
+    //   console.log('1');
+    //
+    // let _this = this;
+    //
+    //   console.log('2');
+    // postsRef.on('value', function(snapshot) {
+    //     console.log(snapshot.val());
+    //
+    //     _this.setState({
+    //         posts: snapshot.val(),
+    //         loading: false
+    //     });
+    // });
+  }
+
+  handleClick() {
+    alert('日本をクリックしました');
   }
   render() {
     return (
@@ -140,7 +165,7 @@ class App extends Component {
               <AppBar title="AppliePie" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
               <div>
                 <Switch>
-                  <Route exact path='/' component={Top} />
+                  <Route exact path='/' render={()=><Top onClick={this.clickMap} />} />
                   <Route exact path='/destination' render={()=><Destination myFunc={this.handleChildFunc.bind(this)} />} />
                   <Route exact path='/schedule' component={Schedule} />
                   <Route exact path='/guest_number' component={GuestNumber} />
