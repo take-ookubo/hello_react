@@ -5,18 +5,17 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {AppBar,RaisedButton,AutoComplete} from 'material-ui';
 
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 import NotFound from './components/NotFound';
+
+import Map from './map.png';
+import { MapInteractionCSS } from 'react-map-interaction';
 
 class Destination extends Component {
   render () {
     return(
       <div>{this.props.myFunc()}目的地入力</div>
     );
-  }
-  hiddenParent(parent) {
-    //  親要素を非表示にする
-    // parent.hidden();
   }
 }
 
@@ -80,6 +79,9 @@ class Top extends Component {
             floatingLabelText="都市名 ホテル名を入力してください"
             fullWidth={true}
           />
+          <MapInteractionCSS>
+            <img src={Map} />
+          </MapInteractionCSS>
         </div>
         <Link to='/destination'>
           <RaisedButton label={this.state.destination} className="Button"/>

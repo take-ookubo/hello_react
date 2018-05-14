@@ -5702,6 +5702,10 @@ react-event-listener@^0.5.1:
     prop-types "^15.6.0"
     warning "^3.0.0"
 
+react-map-interaction@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-map-interaction/-/react-map-interaction-1.1.0.tgz#043bc95f21678213384b7ec078ab0e80bcb0f6cc"
+
 react-router-dom@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.2.2.tgz#c8a81df3adc58bba8a76782e946cbd4eae649b8d"
