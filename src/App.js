@@ -8,8 +8,14 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import NotFound from './components/NotFound';
 
+// TOPページで使用している
 import Map from './map.png';
 import { MapInteractionCSS } from 'react-map-interaction';
+
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 class Destination extends Component {
   render () {
@@ -53,6 +59,7 @@ const menuProps = {
   disableAutoFocus: true,
 };
 
+
 class Top extends Component {
   constructor () {
     super();
@@ -82,16 +89,38 @@ class Top extends Component {
           <MapInteractionCSS>
             <img src={Map} />
           </MapInteractionCSS>
+          <Card>
+            <CardHeader
+              title="人気都市から探す"
+              actAsExpander={true}
+              showExpandableButton={true}
+            />
+            <CardText expandable={true}>
+              <Link to='/hotels/asia/tai/bankoku'>
+                <FlatButton label="バンコク" />
+              </Link>
+              <Link to='/hotels/asia/korea/seoul'>
+                <FlatButton label="ソウル" />
+              </Link>
+              <Divider />
+              <FlatButton label="ホノルル" />
+              <FlatButton label="ロサンゼルス" />
+              <Divider />
+              <FlatButton label="パリ" />
+              <FlatButton label="ミラノ" />
+              <Divider />
+              <FlatButton label="台北" />
+              <FlatButton label="香港" />
+              <Divider />
+              <FlatButton label="ニューヨーク" />
+              <FlatButton label="オーランド" />
+              <Divider />
+              <Divider />
+              <FlatButton label="ロンドン" />
+              <FlatButton label="フィレンツェ" />
+            </CardText>
+          </Card>
         </div>
-        <Link to='/destination'>
-          <RaisedButton label={this.state.destination} className="Button"/>
-        </Link>
-        <Link to='/schedule'>
-          <RaisedButton label={this.state.schedule} className="Button"/>
-        </Link>
-        <Link to='/guest_number'>
-          <RaisedButton label={this.state.guest_number} className="Button"/>
-        </Link>
       </div>
     );
   }
