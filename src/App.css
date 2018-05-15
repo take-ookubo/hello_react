@@ -15,10 +15,56 @@
 
 .ClickableMap .labelMap {
     position: absolute;
-    top: 100px;
-    left:100px;
+    top: 92px;
+    left: 145px;
 }
 
 .Button {
     margin: 12px;
+}
+
+
+.Header {
+    position: relative;
+}
+
+.Header .Subtitle {
+    position: absolute;
+    top: 20px;
+    left: 133px;
+    color: silver;
+    font-size: small;
+}
+
+.TopHeader {
+    width: 100%;
+    height: 139px;
+    padding-left: 35px;
+    background-image: url('top_beach.png');
+}
+
+.TopHeader .TopBeachTitle {
+    /*position: absolute;*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    font-family: serif;
+}
+
+.TopHeader .TopBeachSearchBox {
+    width: 85%;
+    height: 30px;
+}
+
+/*.TopHeader .TopBeachSearchBox .AutoComplete {*/
+    /*height: 55px;*/
+    /*background-color: white;*/
+/*}*/
+
+/*.TopHeader .TopBeachSearchBox .AutoComplete > label{*/
+    /*top: 0px;*/
+/*}*/
+
+.TopHeader .TopBeachSearchBoxIcon {
+    vertical-align: top;
 }
