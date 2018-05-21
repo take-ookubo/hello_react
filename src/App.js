@@ -88,10 +88,87 @@ class Cities extends Component {
 class Hotels extends Component {
   render () {
     return(
-      'ホテル一覧'
+      <div>
+        <ListHeaders />
+        <ListConditions />
+        <ListSortMenues />
+        <ListCounts />
+      </div>
     );
   }
 }
+
+const ListSortMenues = () => {
+  return(
+    <ul>
+      <li>おすすめ</li>
+      <li>距離</li>
+      <li>安い順</li>
+      <li>高い順</li>
+    </ul>
+  );
+};
+
+const ListCounts = () => {
+  return(
+    <div>
+      <span>1,234軒</span>
+      &nbsp;
+      <spafn><a>1泊平均料金表示</a></spafn>
+    </div>
+  );
+};
+
+class ListHotels extends Component {
+  render () {
+    const hotels = [1, 2, 3, 4, 5];
+    return(
+      <ListHotel hotel={hotels} />
+    );
+  }
+}
+
+class ListHotel extends Component {
+  render (props) {
+    return(
+      <div>
+        <span></span>
+      </div>
+    );
+  }
+
+}
+
+class ListConditions extends Component {
+  render () {
+    return(
+      <section className="keyvisual">
+        <div className="slider">
+          <img src="images/hotel2.jpg"></img>
+        </div>
+      </section>
+    );
+  }
+}
+
+class ListHeaders extends Component {
+  render () {
+    return(
+      <div className="header_block">
+        <div className="search-box">
+          <span className="hotel-name">ロサンゼルス周辺のホテル…</span>
+        </div>
+        <a href="#" className="icon-box">
+          <div>5月20日〜2泊, 宿泊者2名</div>
+        </a>
+        <a href="#" className="icon-box">
+          <div>条件変更</div>
+        </a>
+      </div>
+    );
+  }
+}
+
 
 class Top extends Component {
   constructor (props) {
@@ -283,8 +360,7 @@ class App extends Component {
                   <Route exact path='/schedule' component={Schedule} />
                   <Route exact path='/guest_number' component={GuestNumber} />
                   <Route exact path='/asia/japan' component={Country} />
-                  <Route exact path='/hotels/asia/thai/bangkok' component={Hotels} />
-                  <Route exact path='/hotels/asia/japan/kyoto' component={Hotels} />
+                  <Route exact path='/hotels/:area/:country/:city/' component={Hotels} />
                   <Route component={NotFound}/>
                 </Switch>
               </div>
