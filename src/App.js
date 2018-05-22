@@ -88,18 +88,20 @@ class Cities extends Component {
   }
 }
 
-class Hotels extends Component {
-  render () {
-    return(
-      <div>
-        <ListHeaders />
-        <ListConditions />
-        <ListSortMenues />
-        <ListCounts />
-      </div>
-    );
-  }
-}
+// class Hotels extends Component {
+//   render () {
+//     return(
+//       <div id='count'>
+//         <h1>0</h1>
+//         {/*<ListHeaders />*/}
+//         {/*<ListConditions />*/}
+//         {/*<ListSortMenues />*/}
+//         {/*<ListCounts />*/}
+//         {/*<ListHotels />*/}
+//       </div>
+//     );
+//   }
+// }
 
 const ListSortMenues = () => {
   return(
@@ -124,22 +126,99 @@ const ListCounts = () => {
 
 class ListHotels extends Component {
   render () {
-    const hotels = [1, 2, 3, 4, 5];
+    const hotels = [
+      {
+        code: '0000001',
+        name: 'ハレクラニホテル',
+        city_code: '001',
+        score: 8.1,
+        viewed: false,
+        favorite: false,
+        spot_distance: 'ワイキキビーチからの500m',
+        bed_type: 'キングベッド',
+        meals_type: '朝・夕',
+        image_url: 'https://media-cdn.tripadvisor.com/media/photo-s/12/58/f4/fd/pool.jpg',
+        // API で空室紹介の最新情報を取得してくる
+        plan: {
+          price: 32249,
+          before_price: 60500,
+          site_name: 'DeNAトラベル',
+          plan_url: 'https://www.skygate.co.jp/hotel/detail?regionId=&hotelCode=20727&AgentCode=HTLTP&checkin=2018%2F05%2F23&checkout=2018%2F05%2F25&rooms=2',
+        }
+      },
+      {
+        code: '0000002',
+        name: 'ヒルトンハワイアンビレッジ',
+        city_code: '001',
+        score: 5.5,
+        viewed: true,
+        favorite: true,
+        spot_distance: 'ワイキキビーチからの500m',
+        bed_type: 'ツインベッド',
+        meals_type: '朝',
+        image_url: 'http://hiltonhotels.jp/static/upload/hotel_main_20140630191906_lg_pc.jpg',
+        // API で空室紹介の最新情報を取得してくる
+        plan: {
+          price: 32249,
+          before_price: 0,
+          site_name: 'Booking.com',
+          plan_url: 'https://www.booking.com/hotel/us/halekulani.ja.html?label=gen173nr-1FCAEoggJCAlhYSDNYBGh1iAEBmAEVuAEHyAEP2AEB6AEB-AELkgIBeagCAw;sid=ad2d1201fb794d6c29c671bbae1ec3ea;all_sr_blocks=24531403_117521058_2_2_0;bshb=2;checkin=2018-06-02;checkout=2018-06-03;dest_id=20030916;dest_type=city;dist=0;group_adults=2;hapos=1;highlighted_blocks=24531403_117521058_2_2_0;hpos=1;room1=A%2CA;sb_price_type=total;srepoch=1526955595;srfid=4ab091e7569e28e899f04aa243c8a96748b37402X1;srpvid=77b21064bd7603ef;type=total;ucfs=1&#hotelTmpl',
+        }
+      },
+    ];
     return(
-      <ListHotel hotel={hotels} />
+      hotels.map((hotel) =>
+        <ListHotel hotel={hotel} />
+      )
     );
   }
 }
 
 class ListHotel extends Component {
-  render (props) {
+  constructor(props) {
+    super(props);
+    this.state = { hotel: props.hotel };
+  }
+
+  render () {
+    const hotel = this.state.hotel;
     return(
-      <div>
-        <span></span>
-      </div>
+      <ul>
+        <li>
+          <Link to={"/hotels/" + hotel.code}>
+            <img src={hotel.image_url} height='200' width='200' />
+            <span>{hotel.name}</span>
+            <span>{hotel.score}</span>
+            <span>{hotel.spot_distance}</span>
+            <span>お気に入り{hotel.favorite}</span>
+            <ListHotelPlan plan={hotel.plan} />
+          </Link>
+        </li>
+      </ul>
     );
   }
 
+}
+
+class ListHotelPlan extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { plan: props.plan };
+  }
+  render() {
+    const plan = this.state.plan;
+    return(
+      <div>
+        <a href={plan.plan_url}>
+          <span>{plan.bed_type}</span>
+          <span>{plan.meals_type}</span>
+          <span>{plan.site_name}</span>
+          <span>￥{plan.price}</span>
+          <span><strike>￥{plan.before_price}</strike></span>
+        </a>
+      </div>
+    );
+  }
 }
 
 class ListConditions extends Component {
@@ -187,6 +266,7 @@ class Top extends Component {
   }
 
   render () {
+    console.log(new Date());
     return(
       <div>
         <div className='TopHeader'>
@@ -262,6 +342,8 @@ class Top extends Component {
 
 class Country extends Component{
   render () {
+    console.log('Country');
+    console.log(new Date());
     return(
       <Card
         initiallyExpanded={true}
@@ -373,5 +455,211 @@ class App extends Component {
     );
   }
 }
+
+
+class Hotels extends Component {
+  render () {
+    return(
+      <div>
+        <h1>0</h1>
+        {/*<ListHeaders />*/}
+        {/*<ListConditions />*/}
+        {/*<ListSortMenues />*/}
+        {/*<ListCounts />*/}
+        {/*<ListHotels />*/}
+      </div>
+    );
+  }
+}
+
+const ADD_FAVORITE = 'ADD_FAVORITE';
+const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+
+// ActionCreate
+function AddFavorite(hotel_id) {
+  return {
+    type: ADD_FAVORITE,
+    hotel_id
+  }
+}
+
+function RemoveFavorite(hotel_id) {
+  return {
+    type: ADD_FAVORITE,
+    hotel_id
+  }
+}
+
+// Action
+// const ActionAddFavorite = {
+//   type: ADD_FAVORITE,
+//   hotel_id: 0,
+// };
+
+// Reducer
+const initialState = {
+  favorites: [
+    2,3,4,
+  ],
+};
+
+const ReducerFavorite = (state = initialState, action) => {
+  console.log(action.hotel_id);
+  switch(action.type) {
+
+    case ADD_FAVORITE:
+      console.log("favorites: ");
+      state.favorites.forEach(function(item, index, array) {
+        console.log(item, index);
+      });
+      const new_favorites = state.favorites.push(action.hotel_id);
+      return Object.assign({}, state, {
+        favorites: [1],
+      });
+
+    case REMOVE_FAVORITE:
+      // hotel_id = action.hotel_id;
+      // const new_favorites = state.favorites.delete_if { |v| v == hotel_id }
+      const pos = state.favorites.indexOf(action.hotel_id);
+      return Object.assign({}, state, {
+        favorites: state.favorites.splice(pos, 1),
+      });
+
+    default:
+      return state;
+  };
+};
+
+// storeにreducerを登録
+const store = createStore(ReducerFavorite);
+
+// // 初期ステートのログ
+// const store_render = () => ReactDOM.render(
+//   <h1>{store.getState().count}</h1>,
+//   document.getElementById('root')
+// );
+// store_render();
+
+store.subscribe(store_render);
+
+AddFavorite('000001');
+
+document.addEventListener('click', () =>
+  store.dispatch(AddFavorite('000002')))
+;
+
+// storeが更新(dispatch実行時)されたら実行される
+// let unsubscribe = store.subscribe(() =>
+//   console.log(store.getState())
+// );
+
+function reducerA(state = 'hoge', action) {
+  switch (action.type) {
+    case 'ACTION_X':
+      return 'foobar';
+  }
+  return state;
+}
+
+function reducerB(state = { flag: false, items: [] }, action) {
+  switch (action.type) {
+    case 'ACTION_Y':
+      return Object.assign({}, state, { flag: true });
+  }
+  return state;
+}
+
+let config = {
+  expired: {
+    hotel: '30.minute',
+    hotels: '1.days',
+  }
+}
+
+// store
+let initial_store = {
+  // URL での表記
+  // /hotels/japan/tokyo/?check_in=2018-05-01&adult_count=2&hotel_rank=5
+  // ホテル一覧
+  histories: {
+    limit: 50,
+
+    hotel: [
+      {code:1, created_at: '2018/05/22 12:00'}, {code:2}
+    ],
+    hotels: [
+      [
+        {code:1},{code:2}
+      ],
+      [
+        {code:3},{code:4}
+      ],
+    ],
+    urls: [
+      '/hotels/japan',
+      '/hotels/japan/tokyo',
+    ],
+    last_url_id: 1,
+    // 優先順位: 1:直のURL, 2:webStorage, 3:onMemory
+    params: [
+      {
+        check_in: '2018/05/01',
+        adult_count: 2,
+        created_at: '2018/05/22 12:00'
+      },
+      {
+        check_in: '2018/05/02',
+        adult_count: 3,
+        created_at: '2018/05/22 13:00'
+      },
+      {
+        check_in: '2018/05/03',
+        adult_count: 3,
+        created_at: '2018/05/22 14:00'
+      },
+    ],
+    keywords: []
+  },
+  last_ids: {
+    params_id: 49,
+    hotel_id: 49,
+    hotels_id: 49,
+  },
+
+    params:
+      {
+        check_in: '2018/05/01',
+        adult_count: 2,
+        hotel_rank: 5,
+        keyword: '浅草'
+      },
+    keyword_histories: [
+      'ホノルル',
+      '東京'
+    ],
+    hotels: [
+      {
+        code: '00001',
+        name: 'オークラ',
+        image_url: 'http://booking.com/....'
+      },
+      {
+        code: '00001',
+        name: 'オークラ',
+        image_url: 'http://booking.com/....'
+      }
+    ],
+    hotel: {
+
+    }
+
+  // }
+}
+
+
+// let rootReducer = combineReducers();
+//
+// // stateとしてundefinedを渡して初期状態ツリーを取り出す
+// console.log(rootReducer(undefined, { type: null }));
 
 export default App;
