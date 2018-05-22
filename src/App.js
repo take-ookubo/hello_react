@@ -6,6 +6,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // app 全体で使用している
 import AppBar from 'material-ui/AppBar';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+// redux 関連
+import { createStore,combineReducers } from 'redux';
+
 
 // Header で使用している
 import IconButton from 'material-ui/IconButton';
